@@ -41,9 +41,9 @@ function compose(middleware) {
         return Promise.reject(new Error("next() called multiple times"));
       index = i;
       let fn = middleware[i];
-      // i=== middleware.length 表示所有的middleware都遍历完成
+      // i=== middleware.length 表示所有的middleware都遍历完成,取传入的next函数作为最后一个函数
       if (i === middleware.length) fn = next;
-      // 如果fn不存在，那么直接resolve
+      // 如果没有传入next直接返回一个空的promise
       if (!fn) return Promise.resolve();
       try {
         // next的实参  dispatch.bind(null, i + 1)
@@ -51,6 +51,8 @@ function compose(middleware) {
       } catch (err) {
         return Promise.reject(err);
       }
+
+      Promise.resolve();
     }
   };
 }
