@@ -144,15 +144,15 @@ Promise.prototype.then = function (onFulfilled, onReject) {
 };
 
 // 如果Promise.resolve接收到的是一个promise，则会直接返回这个promise；否则，则会进一步执行决议操作。
-// Promise.resolve = function (value) {
-//   return value instanceof Promise
-//     ? value
-//     : new Promise((resolve) => resolve(value));
-// };
+Promise.resolve = function (value) {
+  return value instanceof Promise
+    ? value
+    : new Promise((resolve) => resolve(value));
+};
 
-// // Promise.reject无论接收到什么，都会直接以接收到的值作为拒绝理由，而不会像resolve一样进行拆解。
-// Promise.reject = function (reason) {
-//   return new Promise((resolve, reject) => reject(reason));
-// };
+// Promise.reject无论接收到什么，都会直接以接收到的值作为拒绝理由，而不会像resolve一样进行拆解。
+Promise.reject = function (reason) {
+  return new Promise((resolve, reject) => reject(reason));
+};
 
 module.exports = Promise;
