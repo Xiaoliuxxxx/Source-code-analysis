@@ -154,5 +154,6 @@ Promise.resolve = function (value) {
 Promise.reject = function (reason) {
   return new Promise((resolve, reject) => reject(reason));
 };
+// race... all...@todo
 
 module.exports = Promise;
